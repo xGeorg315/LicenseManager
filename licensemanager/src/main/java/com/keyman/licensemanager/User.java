@@ -1,5 +1,6 @@
 package com.keyman.licensemanager;
 
+import org.springframework.boot.context.properties.bind.Name;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import jakarta.persistence.Entity;
@@ -14,6 +15,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String name;
 
     @Size(max = 30)
     private String firstName;
@@ -50,6 +52,11 @@ public class User {
     public String getPassword()
     {
         return password;
+    }
+
+    public String getName()
+    {
+        return name;
     }
 
     public void setPassword(String password) {

@@ -39,8 +39,37 @@ public class Customer {
         return id;
     }
 
+    public void setId(long ID_)
+    {
+        id = ID_;
+    }
+
     public String getName()
     {
         return name;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public String getTown() {
+        return town;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public Object getUsers() {
+        return users;
     }
 }
