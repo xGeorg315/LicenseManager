@@ -26,5 +26,10 @@ public class Instance {
     private Contract contract;
 
     // Getters and setters
+
+    public void setId(long Id_)
+    {
+        id = Id_;
+    }
 }
 

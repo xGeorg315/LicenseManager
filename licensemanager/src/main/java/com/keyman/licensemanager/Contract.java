@@ -46,4 +46,9 @@ public class Contract {
     private int field4;
 
     // Getters and setters
+
+    public void setId(long Id_)
+    {
+        id = Id_;
+    }
 }
