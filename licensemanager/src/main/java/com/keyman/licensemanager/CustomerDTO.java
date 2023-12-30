@@ -6,7 +6,7 @@ import com.fasterxml.jackson.core.sym.Name;
 
 public class CustomerDTO {
 
-   
+
     private Long id;
     private String name;
     private String department;
@@ -16,7 +16,7 @@ public class CustomerDTO {
     private String country;
     private Object users;
 
-    Customer customer;
+Customer customer;
     // Getters and setters
 
     public Long getId()
@@ -24,9 +24,9 @@ public class CustomerDTO {
         return id;
     }
 
-    public void setId(Long long1)
+    public void setId(Long iD)
     {
-        id = long1;
+        this.id = iD;
     }
 
     public String getName()
@@ -34,24 +34,24 @@ public class CustomerDTO {
         return name;
     }
 
-    public void setName(String Name_)
+    public void setName(String name)
     {
-        name = Name_;
+        this.name = name;
     }
     
-    public String getDepartment( Customer department_)
+    public String getDepartment()
     {
         return department;
     }
 
     public void setDepartment( String department_)
     {
-        department = department_;
+        this.department = department_;
     }
 
-    public void setStreet(String Street_) 
+    public void setStreet(String street_)
     {
-        street = Street_;
+        this.street = street_;
     }
 
     public String getStreet()
@@ -59,9 +59,9 @@ public class CustomerDTO {
         return street;
     }
 
-    public void setTown(String town2) 
+    public void setTown(String town)
     {
-        town = town2;
+        this.town = town;
     }
 
     public String getTown()
@@ -69,9 +69,9 @@ public class CustomerDTO {
         return town;
     }
 
-    public void setZipCode(String zipCode2) 
+    public void setZipCode(String zipCode)
     {
-        zipCode = zipCode2;
+        this.zipCode = zipCode;
     }
 
     public String getZipCode()
@@ -79,9 +79,9 @@ public class CustomerDTO {
         return town;
     }
 
-    public void setCountry(String country2) 
+    public void setCountry(String country)
     {
-        country = country2;
+        this.country = country;
     }
 
     public String getCountry()
@@ -100,5 +100,5 @@ public class CustomerDTO {
     }
 
     
-    
+
 }
