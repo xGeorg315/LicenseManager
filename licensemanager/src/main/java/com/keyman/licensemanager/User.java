@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -41,6 +43,10 @@ public class User {
 
     @Size(max = 30)
     private String phoneNumber2;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")  // adjust the column name based on your schema
+    private Customer customer;
 
     // Getters and setters
 
