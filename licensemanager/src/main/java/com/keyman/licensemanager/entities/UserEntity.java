@@ -81,11 +81,5 @@ public class UserEntity {
     {
         return name;
     }
-
-    public void setPassword(String password) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        this.password = passwordEncoder.encode(password);
-    }
-
     // Add other methods as needed
 }
