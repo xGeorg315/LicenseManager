@@ -1,10 +1,13 @@
-package com.keyman.licensemanager;
+package com.keyman.licensemanager.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.keyman.licensemanager.DTOs.CustomerDTO;
+import com.keyman.licensemanager.entities.Customer;
+import com.keyman.licensemanager.repositorys.CustomerRepository;
+
 import java.util.List;
-import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 

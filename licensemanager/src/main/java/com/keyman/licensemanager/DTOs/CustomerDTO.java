@@ -1,8 +1,5 @@
-package com.keyman.licensemanager;
-
-import java.util.List;
-
-import com.fasterxml.jackson.core.sym.Name;
+package com.keyman.licensemanager.DTOs;
+import com.keyman.licensemanager.entities.Customer;
 
 public class CustomerDTO {
 

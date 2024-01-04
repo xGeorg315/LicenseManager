@@ -1,7 +1,10 @@
-package com.keyman.licensemanager;
+package com.keyman.licensemanager.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.keyman.licensemanager.entities.Instance;
+import com.keyman.licensemanager.repositorys.InstanceRepository;
 
 import java.util.List;
 import java.util.Optional;
