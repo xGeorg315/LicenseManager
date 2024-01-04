@@ -44,7 +44,23 @@ public class CustomerService {
     }
 
  
-    
+    public CustomerDTO createCustomer(CustomerDTO customerDTO) {
+        Customer newCustomer = mapToCustomerDT0(customerDTO);
+        Customer savedCustomer = customerRepository.save(newCustomer);
+        return mapToCustomerDTO(savedCustomer);
+    }
+
+    private Customer mapToCustomerDT0(CustomerDTO customerDTO) {
+        Customer customer = new Customer();
+        customer.setName(customerDTO.getName());
+        customer.setDepartment(customerDTO.getDepartment());
+        customer.setStreet(customerDTO.getStreet());
+        customer.setTown(customerDTO.getTown());
+        customer.setZipCode(customerDTO.getZipCode());
+        customer.setCountry(customerDTO.getCountry());
+        // Setzen Sie hier ggf. andere Attribute und Beziehungen
+        return customer;
+    }
    
     private CustomerDTO mapToCustomerDTO(Customer customer) {
         CustomerDTO customerDTO = new CustomerDTO();
@@ -55,7 +71,7 @@ public class CustomerService {
         customerDTO.setTown(customer.getTown());
         customerDTO.setZipCode(customer.getZipCode());
         customerDTO.setCountry(customer.getCountry());
-        customerDTO.setUsers(customer.getUsers());
+        //customerDTO.setUsers(customer.getUsers());
         return customerDTO;
     }
 }
