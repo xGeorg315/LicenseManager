@@ -1,7 +1,8 @@
-package com.keyman.licensemanager;
+package com.keyman.licensemanager.entities;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
+import javax.persistence.*;
+import javax.validation.constraints.Size;
+
 import java.util.Date;
 
 @Entity
@@ -31,11 +32,11 @@ public class Contract {
 
     @ManyToOne
     @JoinColumn(name = "user1_id")
-    private User user1;
+    private UserEntity user1;
 
     @ManyToOne
     @JoinColumn(name = "user2_id")
-    private User user2;
+    private UserEntity user2;
 
     private int field1;
 
