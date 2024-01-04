@@ -1,7 +1,7 @@
-package com.keyman.licensemanager;
+package com.keyman.licensemanager.entities;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
+import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Instance {

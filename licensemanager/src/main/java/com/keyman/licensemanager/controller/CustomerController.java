@@ -1,10 +1,13 @@
-package com.keyman.licensemanager;
+package com.keyman.licensemanager.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import com.keyman.licensemanager.DTOs.CustomerDTO;
+import com.keyman.licensemanager.entities.Customer;
+import com.keyman.licensemanager.services.CustomerService;
+
 import java.util.List;
-import java.util.Optional;
 import java.util.regex.Pattern;
 
 @RestController

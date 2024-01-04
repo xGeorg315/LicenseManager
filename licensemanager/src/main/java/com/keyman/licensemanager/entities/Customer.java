@@ -1,7 +1,7 @@
-package com.keyman.licensemanager;
+package com.keyman.licensemanager.entities;
 
-import jakarta.validation.constraints.Size;
-import jakarta.persistence.*;
+import javax.validation.constraints.Size;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -30,7 +30,7 @@ public class Customer {
     private String country;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private List<User> users;
+    private List<UserEntity> users;
 
     // Getters and setters
     
