@@ -7,7 +7,7 @@ import com.keyman.licensemanager.entities.Customer;
 
 public class AllCustomerReturnDTO {
     
-    AllCustomerReturnDTO(List<Customer> customers, List<Contract> contracts)
+    public AllCustomerReturnDTO(List<Customer> customers, List<Contract> contracts)
     {
         this.customers = customers;
         this.contracts = contracts;
