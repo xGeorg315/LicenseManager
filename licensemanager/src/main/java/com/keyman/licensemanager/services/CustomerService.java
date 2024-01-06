@@ -74,5 +74,10 @@ public class CustomerService {
         //customerDTO.setUsers(customer.getUsers());
         return customerDTO;
     }
+
+    public List<Customer> getAllCustomers()
+    {
+        return customerRepository.findAll();
+    }
 }
 

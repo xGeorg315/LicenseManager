@@ -13,11 +13,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
 @RestController
-@RequestMapping("/api/customers")
+@RequestMapping("/customers")
 public class CustomerController {
 
     String first_letter = "";
@@ -26,13 +29,13 @@ public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
-    @PostMapping("/create_Customer")
+    @PostMapping("/admin/create_Customer")
     public ResponseEntity<CustomerDTO> createCustomer(@RequestBody CustomerDTO customerDTO) {
         CustomerDTO createdCustomer = customerService.createCustomer(customerDTO);
         return new ResponseEntity<>(createdCustomer, HttpStatus.CREATED);
     }
-
-    @GetMapping("/list_customers_first_letter")
+/* 
+    @GetMapping("list_customers_first_letter")
     public List<CustomerDTO> getCustomersWithFirstLetter() {
         List<CustomerDTO> customersWithUsers = customerService.getAllCustomersWithUsers();
 
@@ -51,6 +54,12 @@ public class CustomerController {
 
         return filteredList;
     }
+*/
+    @GetMapping("/list_customers")
+    public List<Customer> list_customers() {
+        return customerService.getAllCustomers();
+    }
+    
 
     @GetMapping("list_first_customer")
     public ResponseEntity<CustomerDTO> getFirstCustomerWithUsers() {
@@ -69,19 +78,41 @@ public class CustomerController {
     }
 }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/admin/{id}")
     public void deleteCustomer(@PathVariable Long id) {
         customerService.deleteCustomer(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/admin/{id}")
     public Customer updateCustomer(@PathVariable Long id, @RequestBody Customer updatedCustomer) {
         return customerService.updateCustomer(id, updatedCustomer);
     }
 
-    @GetMapping("/search")
+    @GetMapping("/admin/search")
     public List<CustomerDTO> searchCustomersByName(@RequestParam String regex) {
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         return customerService.searchCustomersByName(pattern);
     }
+
+
+    @GetMapping("/admin/list_customers_first_letter")
+    public List<CustomerDTO> getCustomersWithFirstLetter(@RequestParam String regex) {
+        List<CustomerDTO> customersWithUsers = customerService.getAllCustomersWithUsers();
+
+        if (customersWithUsers.isEmpty()) {
+            return Collections.emptyList();  // Wenn die Liste leer ist, eine leere Liste zurückgeben
+        }
+
+        char firstChar = regex.charAt(0);
+        List<CustomerDTO> filteredList = new ArrayList<>();
+
+        for (CustomerDTO customer : customersWithUsers) {
+            if (customer.getName().charAt(0) == firstChar) {
+                filteredList.add(customer);
+            }
+        }
+
+        return filteredList;
+    }
+
 }
