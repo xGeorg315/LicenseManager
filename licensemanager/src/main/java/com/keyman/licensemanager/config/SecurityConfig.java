@@ -31,7 +31,12 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeRequests(req -> {
                     req
-                        .antMatchers("/auth/**").permitAll()
+                        .antMatchers("/auth/**").permitAll() 
+                        .antMatchers("/**").hasAnyRole("ADMIN", "USER")
+                        .antMatchers("/customer/admin/**").hasRole("ADMIN")
+                        .antMatchers("/user/admin/**").hasRole("ADMIN")
+                        .antMatchers("/service-contract/admin/**").hasRole("ADMIN")
+                        .antMatchers("/instance/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated();
                     })
                 .httpBasic(Customizer.withDefaults())
