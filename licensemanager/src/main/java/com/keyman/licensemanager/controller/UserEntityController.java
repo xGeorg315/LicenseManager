@@ -20,17 +20,17 @@ public class UserEntityController {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/get-{id}")
     public UserEntity getUserById(@PathVariable Long id) {
         return userService.getUserById(id).orElse(null);
     }
 
-    @PutMapping("/admin/{id}")
+    @PutMapping("/admin//update-{id}")
     public UserEntity updateUser(@PathVariable Long id, @RequestBody UserEntity updatedUser) {
         return userService.updateUser(id, updatedUser);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
     }

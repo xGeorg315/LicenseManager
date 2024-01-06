@@ -62,8 +62,9 @@ public class CustomerController {
     }
 */
     @GetMapping("/list_customers")
-    public AllCustomerReturnDTO list_customers() {
-        return new AllCustomerReturnDTO(customerService.getAllCustomers(), contractService.getAllContracts());
+    public ResponseEntity<AllCustomerReturnDTO> list_customers() {
+        AllCustomerReturnDTO allCustomerReturnDTO = new AllCustomerReturnDTO(customerService.getAllCustomers(), contractService.getAllContracts());
+        return new ResponseEntity<>(allCustomerReturnDTO, HttpStatus.OK);
     }
     
 
