@@ -43,7 +43,7 @@ public class RegisterController {
 
     @PostMapping("register")
     public ResponseEntity<String> register(@RequestBody RegisterDTO registerDTO) {
-        
+        System.out.println("IN REGISTER CONTROLLER");
         if (userRepository.existsByLoginName(registerDTO.getUsername())){
             return new ResponseEntity<>("username is taken", HttpStatus.BAD_REQUEST);
         }
@@ -62,9 +62,9 @@ public class RegisterController {
 
     @PostMapping("login")
     public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
-       
         System.out.println(loginDTO.getUsername());
         System.out.println(loginDTO.getPassword());
+       
         try {
             Authentication authentication = authenticationManagerBean.authenticate(
                     new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword()));
@@ -74,8 +74,6 @@ public class RegisterController {
             return new ResponseEntity<>("user signed in success", HttpStatus.BAD_REQUEST);
             // Authentication failed, handle accordingly
         }
-        
         return new ResponseEntity<>("user signed in success", HttpStatus.OK);
-    }
-    
+    }    
 }
