@@ -32,11 +32,11 @@ public class SecurityConfig {
                 .authorizeRequests(req -> {
                     req
                         .antMatchers("/auth/**").permitAll() 
-                        .antMatchers("/**").hasAnyRole("ADMIN", "USER")
-                        .antMatchers("/customer/admin/**").hasRole("ADMIN")
-                        .antMatchers("/user/admin/**").hasRole("ADMIN")
-                        .antMatchers("/service-contract/admin/**").hasRole("ADMIN")
-                        .antMatchers("/instance/admin/**").hasRole("ADMIN")
+                        .antMatchers("/users/all").hasAnyAuthority("ADMIN","USER")
+                        .antMatchers("/customer/admin/**").hasAuthority("ADMIN")
+                        .antMatchers("/user/admin/**").hasAuthority("ADMIN")
+                        .antMatchers("/service-contract/admin/**").hasAuthority("ADMIN")
+                        .antMatchers("/instance/admin/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated();
                     })
                 .httpBasic(Customizer.withDefaults())

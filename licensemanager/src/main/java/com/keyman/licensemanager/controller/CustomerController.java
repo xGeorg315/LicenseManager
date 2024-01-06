@@ -5,8 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.keyman.licensemanager.DTOs.AllCustomerReturnDTO;
 import com.keyman.licensemanager.DTOs.CustomerDTO;
 import com.keyman.licensemanager.entities.Customer;
+import com.keyman.licensemanager.services.ContractService;
 import com.keyman.licensemanager.services.CustomerService;
 
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import com.keyman.licensemanager.DTOs.AllCustomerReturnDTO;
 
 
 
@@ -29,6 +31,10 @@ public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
+
+    @Autowired
+    private ContractService contractService;
+
     @PostMapping("/admin/create_Customer")
     public ResponseEntity<CustomerDTO> createCustomer(@RequestBody CustomerDTO customerDTO) {
         CustomerDTO createdCustomer = customerService.createCustomer(customerDTO);
@@ -56,8 +62,8 @@ public class CustomerController {
     }
 */
     @GetMapping("/list_customers")
-    public List<Customer> list_customers() {
-        return customerService.getAllCustomers();
+    public AllCustomerReturnDTO list_customers() {
+        return new AllCustomerReturnDTO(customerService.getAllCustomers(), contractService.getAllContracts());
     }
     
 

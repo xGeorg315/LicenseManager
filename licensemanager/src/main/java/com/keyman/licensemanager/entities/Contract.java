@@ -3,9 +3,12 @@ package com.keyman.licensemanager.entities;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
+import lombok.Data;
+
 import java.util.Date;
 
 @Entity
+@Data
 public class Contract {
 
     @Id
@@ -47,9 +50,4 @@ public class Contract {
     private int field4;
 
     // Getters and setters
-
-    public void setId(long Id_)
-    {
-        id = Id_;
-    }
 }
