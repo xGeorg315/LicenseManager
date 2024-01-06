@@ -81,7 +81,5 @@ public class UserEntity {
     {
         return name;
     }
-
-
     // Add other methods as needed
 }
