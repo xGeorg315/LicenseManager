@@ -11,7 +11,7 @@ public class CustomerDTO {
     private String town;
     private String zipCode;
     private String country;
-    private Object users;
+    //private Object users;
 
 Customer customer;
     // Getters and setters
@@ -86,7 +86,7 @@ Customer customer;
         return town;
     }
 
-    public void setUsers(Object object)
+   /*  public void setUsers(Object object)
     {
         users = object;
     }
@@ -94,7 +94,7 @@ Customer customer;
     public Object getUsers()
     {
         return users;
-    }
+    }*/
 
     
 

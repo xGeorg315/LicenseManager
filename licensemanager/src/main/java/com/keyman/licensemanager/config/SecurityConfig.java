@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -30,7 +31,12 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeRequests(req -> {
                     req
-                        .antMatchers("/auth/**").permitAll()
+                        .antMatchers("/auth/**").permitAll() 
+                        .antMatchers("/users/all").hasAnyAuthority("ADMIN","USER")
+                        .antMatchers("/customer/admin/**").hasAuthority("ADMIN")
+                        .antMatchers("/user/admin/**").hasAuthority("ADMIN")
+                        .antMatchers("/service-contract/admin/**").hasAuthority("ADMIN")
+                        .antMatchers("/instance/admin/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated();
                     })
                 .httpBasic(Customizer.withDefaults())
