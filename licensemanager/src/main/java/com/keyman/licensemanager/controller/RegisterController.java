@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,7 +43,7 @@ public class RegisterController {
 
     @PostMapping("register")
     public ResponseEntity<String> register(@RequestBody RegisterDTO registerDTO) {
-        
+        System.out.println("IN REGISTER CONTROLLER");
         if (userRepository.existsByLoginName(registerDTO.getUsername())){
             return new ResponseEntity<>("username is taken", HttpStatus.BAD_REQUEST);
         }
@@ -61,12 +62,18 @@ public class RegisterController {
 
     @PostMapping("login")
     public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
+        System.out.println(loginDTO.getUsername());
+        System.out.println(loginDTO.getPassword());
        
-        Authentication authentication = authenticationManagerBean.authenticate(
-            new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword()));
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        try {
+            Authentication authentication = authenticationManagerBean.authenticate(
+                    new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            // Authentication successful, handle accordingly
+        } catch (AuthenticationException e) {
+            return new ResponseEntity<>("user signed in success", HttpStatus.BAD_REQUEST);
+            // Authentication failed, handle accordingly
+        }
         return new ResponseEntity<>("user signed in success", HttpStatus.OK);
-    }
-    
+    }    
 }

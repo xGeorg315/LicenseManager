@@ -49,6 +49,36 @@ public class Customer {
         return name;
     }
 
+    public void setName(String name_)
+    {
+        name = name_;
+    }
+
+    public void setDepartment(String department_)
+    {
+        department = department_;
+    }
+
+    public void setStreet(String street_)
+    {
+        street = street_;
+    }
+
+    public void setZipCode(String zipCode_)
+    {
+        zipCode = zipCode_;
+    }
+
+    public void setTown(String town_)
+    {
+        town = town_;
+    }
+
+    public void setCountry(String country_)
+    {
+        country = country_;
+    }
+
     public String getDepartment() {
         return department;
     }
@@ -69,7 +99,7 @@ public class Customer {
         return country;
     }
 
-    public Object getUsers() {
+    /*public Object getUsers() {
         return users;
-    }
+    }*/
 }
