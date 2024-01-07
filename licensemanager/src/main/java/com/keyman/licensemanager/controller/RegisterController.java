@@ -41,18 +41,37 @@ public class RegisterController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @PostMapping("register")
+    @PostMapping("/admin/register")
     public ResponseEntity<String> register(@RequestBody RegisterDTO registerDTO) {
-        System.out.println("IN REGISTER CONTROLLER");
+        
         if (userRepository.existsByLoginName(registerDTO.getUsername())){
             return new ResponseEntity<>("username is taken", HttpStatus.BAD_REQUEST);
+        }
+        if(registerDTO.checkIfNull())
+        {
+            return new ResponseEntity<>("something filled out wrong", HttpStatus.BAD_REQUEST);
         }
 
         UserEntity user = new UserEntity();
         user.setLoginName(registerDTO.getUsername());
         user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
+        user.setAdmin(registerDTO.isAdmin());
+        user.setFirstName(registerDTO.getName());
+        user.setLastName(registerDTO.getLastName());
+        user.setEmail(registerDTO.getEmail());
+        user.setPhoneNumber1(registerDTO.getPhoneNumber1());
+        user.setPhoneNumber2(registerDTO.getPhoneNumber2());
 
-        Roles roles = rolesRepository.findByName("USER").get();
+        Roles roles;
+        if(registerDTO.isAdmin())
+        {
+            roles = rolesRepository.findByName("ADMIN").get();
+        }
+        else
+        {
+            roles = rolesRepository.findByName("USER").get();
+        }
+   
         user.setRoles(Collections.singletonList(roles));
 
         userRepository.save(user);

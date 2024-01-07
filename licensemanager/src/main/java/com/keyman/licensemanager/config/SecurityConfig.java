@@ -32,7 +32,8 @@ public class SecurityConfig {
                 .authorizeRequests(req -> {
                     req
                         .antMatchers("/auth/**").permitAll() 
-                        .antMatchers("/users/all").hasAnyAuthority("ADMIN","USER")
+                        .antMatchers("/auth/admin/register").permitAll()
+                        .antMatchers("/users/**").hasAnyAuthority("ADMIN","USER")
                         .antMatchers("/customer/admin/**").hasAuthority("ADMIN")
                         .antMatchers("/user/admin/**").hasAuthority("ADMIN")
                         .antMatchers("/service-contract/admin/**").hasAuthority("ADMIN")

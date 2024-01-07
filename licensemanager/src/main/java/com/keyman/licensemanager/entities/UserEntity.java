@@ -30,7 +30,7 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+
 
     @Size(max = 30)
     private String firstName;
@@ -66,20 +66,4 @@ public class UserEntity {
     private Customer customer;
 
     // Getters and setters
-
-    public void setId(long id)
-    {
-        this.id = id;
-    }
-
-    public String getPassword()
-    {
-        return password;
-    }
-
-    public String getName()
-    {
-        return name;
-    }
-    // Add other methods as needed
 }
