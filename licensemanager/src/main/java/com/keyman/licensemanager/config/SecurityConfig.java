@@ -33,7 +33,7 @@ public class SecurityConfig {
                     req
                         .antMatchers("/auth/**").permitAll() 
                         .antMatchers("/users/all").hasAnyAuthority("ADMIN","USER")
-                        .antMatchers("/customer/admin/**").hasAuthority("ADMIN")
+                        .antMatchers("/customer/admin/**").hasAuthority("USER")
                         .antMatchers("/user/admin/**").hasAuthority("ADMIN")
                         .antMatchers("/service-contract/admin/**").hasAuthority("ADMIN")
                         .antMatchers("/instance/admin/**").hasAuthority("ADMIN")

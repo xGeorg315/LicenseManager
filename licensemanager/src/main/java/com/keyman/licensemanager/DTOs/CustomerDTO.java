@@ -73,7 +73,7 @@ Customer customer;
 
     public String getZipCode()
     {
-        return town;
+        return zipCode;
     }
 
     public void setCountry(String country)
@@ -83,7 +83,7 @@ Customer customer;
 
     public String getCountry()
     {
-        return town;
+        return country;
     }
 
    /*  public void setUsers(Object object)

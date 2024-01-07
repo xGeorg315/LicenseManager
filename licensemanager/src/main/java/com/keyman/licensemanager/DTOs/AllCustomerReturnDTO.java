@@ -13,6 +13,6 @@ public class AllCustomerReturnDTO {
         this.contracts = contracts;
     }
 
-    private List<Customer> customers;
-    private List<Contract> contracts;
+    public List<Customer> customers;
+    public List<Contract> contracts;
 }

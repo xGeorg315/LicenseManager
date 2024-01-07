@@ -1,5 +1,7 @@
 package com.keyman.licensemanager.entities;
 
+import java.util.List;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
@@ -22,6 +24,7 @@ public class Instance {
     private String type;
 
     private int status;
+
 
     @ManyToOne
     @JoinColumn(name = "contract_id")
@@ -77,6 +80,14 @@ public class Instance {
     public int getStatus()
     {
         return status;
+    }
+
+    public Contract getContract() {
+        return contract;
+    }
+
+    public void setContract(Contract contract) {
+        this.contract = contract;
     }
 }
 
