@@ -10,14 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import com.keyman.licensemanager.services.ContractService;
-import com.keyman.licensemanager.services.CustomerService;
-import com.keyman.licensemanager.services.UserService;
 
-import net.bytebuddy.agent.builder.AgentBuilder.LocationStrategy.Simple;
+import com.keyman.licensemanager.services.ContractService;
+import com.keyman.licensemanager.services.UserService;
 
 import com.keyman.licensemanager.DTOs.ContractDTO;
 import com.keyman.licensemanager.entities.Contract;
@@ -26,6 +22,10 @@ import com.keyman.licensemanager.entities.UserEntity;
 import com.keyman.licensemanager.repositorys.ContractRepository;
 import com.keyman.licensemanager.repositorys.CustomerRepository;
 import com.keyman.licensemanager.repositorys.UserRepository;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 @RestController
 @RequestMapping("/contracts")
@@ -50,6 +50,58 @@ public class ContractController {
     @GetMapping("/admin/{id}")
     public Contract getContractById(@PathVariable Long id) {
         return contractService.getContractById(id).orElse(null);
+    }
+
+    @Transactional
+    @PutMapping("/edit")
+    public ResponseEntity<String> UserEdits(@RequestBody ContractDTO contractDTO)
+    {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserEntity loggedUser;
+        if (principal instanceof UserDetails) {
+            String username = ((UserDetails)principal).getUsername();
+            loggedUser = userService.getUserByLoginName(username);
+        } else {
+            String username = principal.toString();
+            loggedUser = userService.getUserByLoginName(username);
+        }
+        Contract contract = contractService.getContractById(loggedUser.getContract().getId()).orElse(null);
+
+        if(contractDTO.getIp1() != null){
+            contract.setIpAddress1(contractDTO.getIp1());
+        }
+        if(contractDTO.getIp1() != null && contractDTO.getIp2() != null){
+            contract.setIpAddress2(contractDTO.getIp2());
+        }
+        if(contractDTO.getIp1() != null && contractDTO.getIp2() != null && contractDTO.getIp3() != null){
+            contract.setIpAddress3(contractDTO.getIp3());
+        }
+        if(contractDTO.getVersion() != null){
+            contract.setVersion(contractDTO.getVersion());
+        }
+        contractService.updateContract(contract.getId(), contract);
+        return new ResponseEntity<>("edit success", HttpStatus.OK);
+    }
+
+    @Transactional
+    @PutMapping("/admin/edit")
+    public ResponseEntity<String> AdminEdits(@RequestBody ContractDTO contractDTO) throws ParseException{
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserEntity loggedUser;
+        if (principal instanceof UserDetails) {
+            String username = ((UserDetails)principal).getUsername();
+            loggedUser = userService.getUserByLoginName(username);
+        } else {
+            String username = principal.toString();
+            loggedUser = userService.getUserByLoginName(username);
+        }
+        Contract contract = contractService.getContractById(loggedUser.getContract().getId()).orElse(null);
+
+        Contract updateContract = mapDTOtoContract(contractDTO, contract);
+
+        contractService.updateContract(updateContract.getId(), contract);
+
     }
 
     @Transactional
@@ -130,13 +182,13 @@ public class ContractController {
             contract.setVersion(contractDTO.getVersion());
 
         UserEntity user;
-        if(userRepository.existsById(contractDTO.getUser1_id())){
+        if(contractDTO.getUser1_id() != null && userRepository.existsById(contractDTO.getUser1_id())){
             user = userRepository.findById(contractDTO.getUser1_id()).get();
             user.setContract(contract);
             userService.updateUser(user.getId(), user);
             
         }
-        if(userRepository.existsById(contractDTO.getUser2_id())){
+        if(contractDTO.getUser2_id() != null && userRepository.existsById(contractDTO.getUser2_id())){
             user = userRepository.findById(contractDTO.getUser2_id()).get();
             user.setContract(contract);  
             userService.updateUser(user.getId(), user);
