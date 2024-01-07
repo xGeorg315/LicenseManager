@@ -1,5 +1,6 @@
 package com.keyman.licensemanager.DTOs;
 import com.keyman.licensemanager.entities.Instance;
+import com.keyman.licensemanager.entities.Contract;
 
 public class InstanceDTO {
     private int status;
@@ -7,6 +8,9 @@ public class InstanceDTO {
     private String name;
     private String type;
     private Long id;
+    private Contract contract;
+    
+
 
 Instance instance;
 

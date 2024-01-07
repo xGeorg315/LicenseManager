@@ -19,7 +19,7 @@ public class InstanceController {
     private InstanceService instanceService;
 
     @GetMapping
-    public ResponseEntity<List<Instance>> getAllInstances() {
+    public ResponseEntity<List<Instance>> getAllInstances(@RequestParam String regex) {
         List<Instance> instances = instanceService.getAllInstances();
         return new ResponseEntity<>(instances, HttpStatus.OK);
     }
@@ -31,7 +31,7 @@ public class InstanceController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping
+    @PostMapping("/admin/create_instance")
     public ResponseEntity<Instance> createInstance(@RequestBody InstanceDTO instanceDTO) {
         Instance createdInstance = instanceService.createInstance(convertDTOToEntity(instanceDTO));
         return new ResponseEntity<>(createdInstance, HttpStatus.CREATED);
