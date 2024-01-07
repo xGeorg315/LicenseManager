@@ -18,7 +18,7 @@ public class InstanceController {
     @Autowired
     private InstanceService instanceService;
 
-    @GetMapping
+    @GetMapping("/list_all_instances")
     public ResponseEntity<List<Instance>> getAllInstances(@RequestParam String regex) {
         List<Instance> instances = instanceService.getAllInstances();
         return new ResponseEntity<>(instances, HttpStatus.OK);

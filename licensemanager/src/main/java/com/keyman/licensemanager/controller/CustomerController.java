@@ -44,27 +44,6 @@ public class CustomerController {
         CustomerDTO createdCustomer = customerService.createCustomer(customerDTO);
         return new ResponseEntity<>(createdCustomer, HttpStatus.CREATED);
     }
-/* 
-    @GetMapping("list_customers_first_letter")
-    public List<CustomerDTO> getCustomersWithFirstLetter() {
-        List<CustomerDTO> customersWithUsers = customerService.getAllCustomersWithUsers();
-
-        if (customersWithUsers.isEmpty()) {
-            return Collections.emptyList();  // Wenn die Liste leer ist, eine leere Liste zurückgeben
-        }
-
-        char firstChar = customersWithUsers.get(0).getName().charAt(0);
-        List<CustomerDTO> filteredList = new ArrayList<>();
-
-        for (CustomerDTO customer : customersWithUsers) {
-            if (customer.getName().charAt(0) == firstChar) {
-                filteredList.add(customer);
-            }
-        }
-
-        return filteredList;
-    }
-*/
 
 
     @GetMapping("/list_customers")
@@ -127,5 +106,28 @@ public class CustomerController {
 
         return filteredList;
     }
+
+
+    @GetMapping("list_customers_first_letter_2")
+    public List<CustomerDTO> getCustomersWithFirstLetter() {
+        List<CustomerDTO> customersWithUsers = customerService.getAllCustomersWithUsers();
+
+        if (customersWithUsers.isEmpty()) {
+            return Collections.emptyList();  // Wenn die Liste leer ist, eine leere Liste zurückgeben
+        }
+
+        char firstChar = customersWithUsers.get(0).getName().charAt(0);
+        List<CustomerDTO> filteredList = new ArrayList<>();
+
+        for (CustomerDTO customer : customersWithUsers) {
+            if (customer.getName().charAt(0) == firstChar) {
+                filteredList.add(customer);
+            }
+        }
+
+        return filteredList;
+    }
+
+
 
 }
