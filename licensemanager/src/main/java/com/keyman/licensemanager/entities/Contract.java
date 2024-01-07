@@ -5,7 +5,9 @@ import javax.validation.constraints.Size;
 
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -30,24 +32,20 @@ public class Contract {
     @Size(max = 20)
     private String ipAddress3;
 
-    @Lob
+   @Lob
     private String licenseKey;
 
-    @ManyToOne
-    @JoinColumn(name = "user1_id")
-    private UserEntity user1;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
-    @ManyToOne
-    @JoinColumn(name = "user2_id")
-    private UserEntity user2;
+    private Long field1;
 
-    private int field1;
+    private Long field2;
 
-    private int field2;
+    private Long field3;
 
-    private int field3;
-
-    private int field4;
+    private String version;
 
     // Getters and setters
 }

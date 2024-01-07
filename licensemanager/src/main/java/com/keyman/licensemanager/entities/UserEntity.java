@@ -2,10 +2,6 @@ package com.keyman.licensemanager.entities;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.boot.context.properties.bind.Name;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import javax.annotation.sql.DataSourceDefinition;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import lombok.Getter;
@@ -61,9 +58,13 @@ public class UserEntity {
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private List<Roles> roles = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")  // adjust the column name based on your schema
     private Customer customer;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "contract_id")  // adjust the column name based on your schema
+    private Contract contract;
 
     // Getters and setters
 }

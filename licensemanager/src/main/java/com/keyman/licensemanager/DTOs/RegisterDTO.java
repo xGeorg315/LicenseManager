@@ -9,25 +9,25 @@ public class RegisterDTO {
     String name;
     String lastName;
     String email;
-    boolean isAdmin;
+    String role_user;
     String phoneNumber1;
     String phoneNumber2;
+    Long customer_id;
 
     public boolean checkIfNull()
     {
-        if(username.equals(null) || username.equals("")) return true;
-        if(password.equals(null) || password.equals("")) return true;
-        if(name.equals(null) || name.equals("")) return true;
-        if(lastName.equals(null) || lastName.equals("")) return true;
-        if(email.equals(null) || email.equals("")) return true;
-        if(phoneNumber1.equals(null) || phoneNumber1.equals("")) return true;
-        if(phoneNumber2.equals(null) || phoneNumber2.equals("")) return true;
+        if(username == null|| username.equals("")) return true;
+        if(password == null || password.equals("")) return true;
+        if(name == null || name.equals("")) return true;
+        if(lastName == null || lastName.equals("")) return true;
+        if(email == null || email.equals("")) return true;
+        if(phoneNumber1 == null || phoneNumber1.equals("")) return true;
+        if(phoneNumber2 == null || phoneNumber2.equals("")) return true;
+        if(role_user == null || role_user.equals("")) return true;
+        //if(customer_id == null) return true;
+
 
         return false;
     }
-    public boolean isAdmin()
-    {
-        if(isAdmin) return true;
-        return false;
-    }
+ 
 }

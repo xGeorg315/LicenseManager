@@ -39,5 +39,6 @@ public class ContractService {
     public void deleteContract(Long id) {
         contractRepository.deleteById(id);
     }
+
 }
 
