@@ -8,9 +8,7 @@ public class InstanceDTO {
     private String name;
     private String type;
     private Long id;
-    private Contract contract;
     
-
 
 Instance instance;
 
