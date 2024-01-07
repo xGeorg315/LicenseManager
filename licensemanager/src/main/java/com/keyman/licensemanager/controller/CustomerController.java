@@ -60,11 +60,14 @@ public class CustomerController {
         return filteredList;
     }
 */
-@GetMapping("/list_customers")
-     public ResponseEntity<AllCustomerReturnDTO> list_customers()
+
+
+    @GetMapping("/list_customers")
+    public ResponseEntity<AllCustomerReturnDTO> list_customers() 
     {
-     AllCustomerReturnDTO allCustomerReturnDTO = new AllCustomerReturnDTO(customerService.getAllCustomers(), contractService.getAllContracts()); 
-     return new ResponseEntity<>(allCustomerReturnDTO, HttpStatus.OK);     
+        AllCustomerReturnDTO allCustomerReturnDTO = new AllCustomerReturnDTO(customerService.getAllCustomers(), contractService.getAllContracts());
+        return new ResponseEntity<>(allCustomerReturnDTO, HttpStatus.OK);
+
     }
     
 
