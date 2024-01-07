@@ -1,0 +1,169 @@
+package com.keyman.licensemanager;
+
+import com.keyman.licensemanager.DTOs.InstanceDTO;
+import com.keyman.licensemanager.entities.Instance;
+import com.keyman.licensemanager.repositorys.InstanceRepository;
+import com.keyman.licensemanager.services.InstanceService;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+@SpringBootTest
+@Transactional
+class InstanceServiceTest {
+
+    @Autowired
+    private InstanceService instanceService;
+
+    @Autowired
+    private InstanceRepository instanceRepository;
+
+    @BeforeEach
+    void setUp() {
+        // Hier könnten Sie Datenbankinitialisierung oder andere Setup-Aufgaben durchführen
+    }
+
+    @Test
+    void testCreateUpdateDeleteInstance() {
+        // Test Create
+        InstanceDTO instanceDTO = new InstanceDTO();
+        instanceDTO.setName("TestInstance");
+        instanceDTO.setIpAdress("TestIP");
+        instanceDTO.setType("TestType");
+        instanceDTO.setStatus(1);
+
+        Instance createdInstance = instanceService.createInstance(instanceDTO);
+        assertNotNull(createdInstance);
+        assertNotNull(createdInstance.getId());
+
+        // Test Update
+        String updatedName = "UpdatedInstance";
+        instanceDTO.setName(updatedName);
+
+        Instance updatedInstance = instanceService.updateInstance(createdInstance.getId(), instanceDTO);
+
+        assertNotNull(updatedInstance);
+        assertEquals(updatedName, updatedInstance.getName());
+
+        // Test Delete
+        instanceService.deleteInstance(createdInstance.getId());
+        Optional<Instance> deletedInstance = instanceRepository.findById(createdInstance.getId());
+        assertTrue(deletedInstance.isEmpty());
+    }
+
+    @Test
+    void testGetInstanceById() {
+        Instance instance = new Instance();
+        instance.setName("TestInstance");
+        instance.setIpAdress("TestIP");
+        instance.setType("TestType");
+        instance.setStatus(1);
+
+        Instance savedInstance = instanceRepository.save(instance);
+
+        Optional<Instance> retrievedInstance = instanceService.getInstanceById(savedInstance.getId());
+
+        assertTrue(retrievedInstance.isPresent());
+        assertEquals("TestInstance", retrievedInstance.get().getName());
+    }
+
+    @Test
+    void testGetAllInstances() {
+        List<Instance> instances = instanceService.getAllInstances();
+        assertNotNull(instances);
+        // Je nach Testdaten und Anforderungen können Sie die Assertions anpassen
+    }
+}
+
+
+
+
+
+/*
+
+
+package com.keyman.licensemanager;
+
+import com.keyman.licensemanager.DTOs.CustomerDTO;
+import com.keyman.licensemanager.entities.Customer;
+import com.keyman.licensemanager.repositorys.CustomerRepository;
+import com.keyman.licensemanager.services.CustomerService;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Pattern;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+
+@SpringBootTest
+class CustomerServiceTest {
+
+    @Autowired
+    private CustomerService customerService;
+
+    @Test
+    void testCreateUpdateDeleteCustomer() {
+        // Test Create
+        CustomerDTO customerDTO = new CustomerDTO();
+        customerDTO.setName("TestCustomer");
+        customerDTO.setDepartment("TestDepartment");
+        customerDTO.setStreet("TestStreet");
+        customerDTO.setTown("TestTown");
+        customerDTO.setZipCode("12345");
+        customerDTO.setCountry("TestCountry");
+
+        CustomerDTO createdCustomerDTO = customerService.createCustomer(customerDTO);
+        assertNotNull(createdCustomerDTO);
+        assertNotNull(createdCustomerDTO.getId());
+
+        // Test Update
+        String updatedName = "UpdatedName";
+        createdCustomerDTO.setName(updatedName);
+
+        Long customerId = createdCustomerDTO.getId();
+        Customer updatedCustomer = customerService.updateCustomer(customerId, customerService.mapToCustomerEntity(createdCustomerDTO));
+
+        assertNotNull(updatedCustomer);
+        assertEquals(updatedName, updatedCustomer.getName());
+
+        // Test Delete
+        customerService.deleteCustomer(customerId);
+        assertNull(customerService.updateCustomer(customerId, updatedCustomer));
+    }
+
+    @Test
+    void testGetAllCustomersWithUsers() {
+        List<CustomerDTO> customers = customerService.getAllCustomersWithUsers();
+        assertNotNull(customers);
+        assertTrue(customers.size() > 0);
+    }
+
+    @Test
+    void testSearchCustomersByName() {
+        String searchPattern = "Test";
+        Pattern pattern = Pattern.compile(searchPattern, Pattern.CASE_INSENSITIVE);
+    
+        List<CustomerDTO> customers = customerService.searchCustomersByName(pattern);
+        assertNotNull(customers);
+        // Ändern Sie die Erwartung basierend auf Ihren Testdaten und Anforderungen
+        assertTrue(customers.size() >= 0);
+    }
+    
+}
+*/

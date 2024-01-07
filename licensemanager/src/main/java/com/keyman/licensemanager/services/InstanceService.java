@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.keyman.licensemanager.entities.Instance;
 import com.keyman.licensemanager.repositorys.InstanceRepository;
+import com.keyman.licensemanager.DTOs.InstanceDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,34 +16,43 @@ public class InstanceService {
     @Autowired
     private InstanceRepository instanceRepository;
 
-    public List<Instance> getAllInstances() {
-        return instanceRepository.findAll();
-    }
+    // Andere Methoden bleiben unverändert
 
-    public Optional<Instance> getInstanceById(Long id) {
-        return instanceRepository.findById(id);
-    }
-
-    public Instance createInstance(Instance instance) {
+    public Instance createInstance(InstanceDTO instanceDTO) {
+        Instance instance = convertDTOtoInstance(instanceDTO);
         return instanceRepository.save(instance);
     }
 
-    public Instance updateInstance(Long id, Instance updatedInstance) {
-        if (instanceRepository.existsById(id)) {
-            updatedInstance.setId(id);
-            return instanceRepository.save(updatedInstance);
+    public Instance updateInstance(Long id, InstanceDTO updatedInstanceDTO) {
+        Optional<Instance> existingInstanceOptional = instanceRepository.findById(id);
+
+        if (existingInstanceOptional.isPresent()) {
+            Instance existingInstance = existingInstanceOptional.get();
+            updateInstanceFromDTO(existingInstance, updatedInstanceDTO);
+            return instanceRepository.save(existingInstance);
         } else {
             return null; // Handle not found case
         }
     }
 
-    public void deleteInstance(Long id) {
-        instanceRepository.deleteById(id);
+    // Andere Methoden bleiben unverändert
+
+    private Instance convertDTOtoInstance(InstanceDTO instanceDTO) {
+        Instance instance = new Instance();
+        instance.setName(instanceDTO.getName());
+        instance.setIpAdress(instanceDTO.getIpAdress());
+        instance.setType(instanceDTO.getType());
+        instance.setStatus(instanceDTO.getStatus());
+        // Setzen Sie andere Felder entsprechend
+
+        return instance;
     }
 
-    public void setInstanceRepository(InstanceRepository instanceRepository) {
-        this.instanceRepository = instanceRepository;
+    private void updateInstanceFromDTO(Instance instance, InstanceDTO instanceDTO) {
+        instance.setName(instanceDTO.getName());
+        instance.setIpAdress(instanceDTO.getIpAdress());
+        instance.setType(instanceDTO.getType());
+        instance.setStatus(instanceDTO.getStatus());
+        // Aktualisieren Sie andere Felder entsprechend
     }
-
 }
-
