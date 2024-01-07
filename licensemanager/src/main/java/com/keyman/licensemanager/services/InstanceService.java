@@ -39,5 +39,10 @@ public class InstanceService {
     public void deleteInstance(Long id) {
         instanceRepository.deleteById(id);
     }
+
+    public void setInstanceRepository(InstanceRepository instanceRepository) {
+        this.instanceRepository = instanceRepository;
+    }
+
 }
 
