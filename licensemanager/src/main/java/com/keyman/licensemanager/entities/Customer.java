@@ -107,7 +107,7 @@ public class Customer {
         return country;
     }
 
-    /*public Object getUsers() {
+    public Object getUsers() {
         return users;
-    }*/
+    }
 }
