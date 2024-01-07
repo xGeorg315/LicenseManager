@@ -12,19 +12,19 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/instances")
+@RequestMapping("/admin/instances")
 public class InstanceController {
 
     @Autowired
     private InstanceService instanceService;
 
-    @GetMapping("/list_all_instances")
+    @GetMapping("/admin/list_all_instances")
     public ResponseEntity<List<Instance>> getAllInstances(@RequestParam String regex) {
         List<Instance> instances = instanceService.getAllInstances();
         return new ResponseEntity<>(instances, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/admin/{id}")
     public ResponseEntity<Instance> getInstanceById(@PathVariable Long id) {
         Optional<Instance> instance = instanceService.getInstanceById(id);
         return instance.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
@@ -37,7 +37,7 @@ public class InstanceController {
         return new ResponseEntity<>(createdInstance, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/admin/edit/{id}")
     public ResponseEntity<Instance> updateInstance(@PathVariable Long id, @RequestBody InstanceDTO instanceDTO) {
         Instance updatedInstance = instanceService.updateInstance(id, convertDTOToEntity(instanceDTO));
         if (updatedInstance != null) {
@@ -47,7 +47,7 @@ public class InstanceController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/admin/delete/{id}")
     public ResponseEntity<Void> deleteInstance(@PathVariable Long id) {
         instanceService.deleteInstance(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
