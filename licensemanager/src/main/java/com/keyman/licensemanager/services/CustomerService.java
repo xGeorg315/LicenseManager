@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.keyman.licensemanager.DTOs.CustomerDTO;
 import com.keyman.licensemanager.entities.Customer;
 import com.keyman.licensemanager.repositorys.CustomerRepository;
+import java.util.Collections;
 
 import java.util.List;
 import java.util.regex.Pattern;
@@ -38,17 +39,30 @@ public class CustomerService {
 
     public List<CustomerDTO> searchCustomersByName(Pattern pattern) {
         return customerRepository.findAll().stream()
-                .filter(customer -> pattern.matcher(customer.getName()).find())
+                .filter(customer -> {
+                    if (pattern == null || customer.getName() == null) {
+                        return false; // oder eine andere Logik, wenn null nicht erlaubt ist
+                    }
+                    return pattern.matcher(customer.getName()).find();
+                })
                 .map(this::mapToCustomerDTO)
                 .collect(Collectors.toList());
     }
+    
 
  
     public CustomerDTO createCustomer(CustomerDTO customerDTO) {
-        Customer newCustomer = mapToCustomerDT0(customerDTO);
-        Customer savedCustomer = customerRepository.save(newCustomer);
-        return mapToCustomerDTO(savedCustomer);
+        Customer customer = mapToCustomerEntity(customerDTO);
+        customer = customerRepository.save(customer);
+    
+        if (customer != null) {
+            return mapToCustomerDTO(customer);
+        } else {
+            // Hier können Sie eine angemessene Behandlung für den Fall hinzufügen, dass der Kunde null ist.
+            return null;
+        }
     }
+    
 
     private Customer mapToCustomerDT0(CustomerDTO customerDTO) {
         Customer customer = new Customer();
@@ -79,5 +93,19 @@ public class CustomerService {
     {
         return customerRepository.findAll();
     }
+
+    public Customer mapToCustomerEntity(CustomerDTO customerDTO) {
+        Customer customerEntity = new Customer();
+    
+        // Hier erfolgt die Zuordnung der Werte von CustomerDTO zu Customer
+        if (customerDTO.getId() != null) {
+            customerEntity.setId(customerDTO.getId());
+        }
+        customerEntity.setName(customerDTO.getName());
+        // Weitere Zuordnungen je nach Ihren Datenmodellen
+    
+        return customerEntity;
+    }
+    
 }
 

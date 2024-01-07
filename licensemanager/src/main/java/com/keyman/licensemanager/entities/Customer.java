@@ -84,7 +84,7 @@ public class Customer {
     }
 
     public String getStreet() {
-        return street;
+        return department;
     }
 
     public String getTown() {
