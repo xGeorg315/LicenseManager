@@ -16,7 +16,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+=======
+
 import com.keyman.licensemanager.DTOs.AllCustomerReturnDTO;
+
 
 
 
@@ -63,13 +68,11 @@ public class CustomerController {
 
 
     @GetMapping("/list_customers")
-    public ResponseEntity<AllCustomerReturnDTO> list_customers() 
-    {
-        AllCustomerReturnDTO allCustomerReturnDTO = new AllCustomerReturnDTO(customerService.getAllCustomers(), contractService.getAllContracts());
-        return new ResponseEntity<>(allCustomerReturnDTO, HttpStatus.OK);
 
+    public @ResponseBody AllCustomerReturnDTO list_customers() {
+        AllCustomerReturnDTO allCustomerReturnDTO = new AllCustomerReturnDTO(customerService.getAllCustomers(), contractService.getAllContracts());
+        return allCustomerReturnDTO;
     }
-    
 
     @GetMapping("list_first_customer")
     public ResponseEntity<CustomerDTO> getFirstCustomerWithUsers() {

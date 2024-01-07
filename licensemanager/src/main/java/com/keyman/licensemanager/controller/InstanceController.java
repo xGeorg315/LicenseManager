@@ -1,9 +1,7 @@
 package com.keyman.licensemanager.controller;
 
-import com.keyman.licensemanager.DTOs.CustomerDTO;
 import com.keyman.licensemanager.DTOs.InstanceDTO;
 import com.keyman.licensemanager.entities.Instance;
-import com.keyman.licensemanager.services.CustomerService;
 import com.keyman.licensemanager.services.InstanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

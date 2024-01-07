@@ -1,18 +1,9 @@
 package com.keyman.licensemanager.entities;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
-import org.springframework.web.bind.annotation.SessionAttributes;
-
-import javax.annotation.Generated;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
