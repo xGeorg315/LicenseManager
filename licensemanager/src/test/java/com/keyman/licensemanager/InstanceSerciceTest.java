@@ -33,7 +33,7 @@ class InstanceServiceTest {
     @Test
     void testCreateUpdateDeleteInstance() {
         // Test Create
-        InstanceDTO instanceDTO = new InstanceDTO();
+        Instance instanceDTO = new Instance();
         instanceDTO.setName("TestInstance");
         instanceDTO.setIpAdress("TestIP");
         instanceDTO.setType("TestType");
