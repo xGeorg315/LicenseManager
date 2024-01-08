@@ -9,6 +9,6 @@ import com.keyman.licensemanager.entities.Customer;
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     // You can add custom query methods here if needed
-    
+    boolean existsById(Long id);
     
 }

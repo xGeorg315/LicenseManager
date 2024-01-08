@@ -1,7 +1,12 @@
 package com.keyman.licensemanager.entities;
 
 import javax.validation.constraints.Size;
+
+import org.apache.tomcat.jni.User;
+
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -30,7 +35,10 @@ public class Customer {
     private String country;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private List<UserEntity> users;
+    private List<UserEntity> users = new ArrayList<UserEntity>();;
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<Contract> contracts = new ArrayList<Contract>();;
 
     // Getters and setters
     
