@@ -5,7 +5,12 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 
+import aj.org.objectweb.asm.Type;
+import lombok.Data;
+
+
 @Entity
+@Data
 public class Instance {
 
     @Id
@@ -24,9 +29,8 @@ public class Instance {
     private int status;
 
 
-    @ManyToOne
-    @JoinColumn(name = "contract_id")
-    private Contract contract;
+
+    private Long ContractId;
 
     // Getters and setters
 
@@ -80,12 +84,6 @@ public class Instance {
         return status;
     }
 
-    public Contract getContract() {
-        return contract;
-    }
 
-    public void setContract(Contract contract) {
-        this.contract = contract;
-    }
 }
 

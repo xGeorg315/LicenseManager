@@ -1,7 +1,9 @@
 package com.keyman.licensemanager.controller;
 
 import com.keyman.licensemanager.DTOs.InstanceDTO;
+import com.keyman.licensemanager.entities.Contract;
 import com.keyman.licensemanager.entities.Instance;
+import com.keyman.licensemanager.services.ContractService;
 import com.keyman.licensemanager.services.InstanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,14 +14,16 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/admin/instances")
+@RequestMapping("/instances")
 public class InstanceController {
 
     @Autowired
     private InstanceService instanceService;
+    @Autowired
+    private ContractService contractService;
 
     @GetMapping("/admin/list_all_instances")
-    public ResponseEntity<List<Instance>> getAllInstances(@RequestParam String regex) {
+    public ResponseEntity<List<Instance>> getAllInstances() {
         List<Instance> instances = instanceService.getAllInstances();
         return new ResponseEntity<>(instances, HttpStatus.OK);
     }
@@ -57,15 +61,12 @@ public class InstanceController {
 
     private Instance convertDTOToEntity(InstanceDTO instanceDTO) {
         // Überprüfen Sie, ob id null ist, bevor Sie longValue() aufrufen
-        Long id = instanceDTO.getId();
-        long idValue = (id != null) ? id.longValue() : 0L;
-    
         Instance instance = new Instance();
         instance.setStatus(instanceDTO.getStatus());
         instance.setIpAdress(instanceDTO.getIpAdress());
         instance.setName(instanceDTO.getName());
         instance.setType(instanceDTO.getType());
-        instance.setId(idValue); // Verwenden Sie den überprüften idValue
+        instance.setContractId(instanceDTO.getId());
         return instance;
     }
     
