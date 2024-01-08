@@ -18,7 +18,9 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserEntityController {
 
+    @Autowired
     private PasswordEncoder passwordEncoder;
+
 
     public UserEntityController(PasswordEncoder passwordEncoder)
     {
@@ -43,7 +45,7 @@ public class UserEntityController {
         
         UserEntity currentUser = userService.getUserById(id).get();
 
-        UserEntity user = userChangeNonNullValues(updatedUser, currentUser, true);
+        UserEntity user = userService.userChangeNonNullValues(updatedUser, currentUser, true);
 
         return new ResponseEntity<>(userService.updateUser(id, user), HttpStatus.OK);
     }
@@ -61,7 +63,7 @@ public class UserEntityController {
             loggedUser = userService.getUserByLoginName(username);
         }
         Long id = loggedUser.getId();
-        UserEntity user = userChangeNonNullValues(updatedUser, loggedUser, false);
+        UserEntity user = userService.userChangeNonNullValues(updatedUser, loggedUser, false);
         return userService.updateUser(id, user);
     }
 
@@ -71,23 +73,4 @@ public class UserEntityController {
     }
 
 
-    public UserEntity userChangeNonNullValues(UserUpdateDTO updatedUser, UserEntity currentUser, boolean adminRequest)
-    {
-        if(!(updatedUser.getUsername() == null || updatedUser.getUsername().equals("")))
-            currentUser.setLoginName(updatedUser.getUsername());
-        if(!(updatedUser.getPassword() == null || updatedUser.getPassword().equals("")) && !adminRequest)
-            currentUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
-        if(!(updatedUser.getFirstName() == null || updatedUser.getFirstName().equals(""))) 
-            currentUser.setFirstName(updatedUser.getFirstName());
-        if(!(updatedUser.getLastName() == null || updatedUser.getLastName().equals("")))
-            currentUser.setLastName(updatedUser.getLastName());
-        if(!(updatedUser.getEmail() == null || updatedUser.getEmail().equals("")))
-            currentUser.setEmail(updatedUser.getEmail());
-        if(!(updatedUser.getPhoneNumber1() == null || updatedUser.getPhoneNumber1().equals("")))
-            currentUser.setPhoneNumber1(updatedUser.getPhoneNumber1());
-        if(!(updatedUser.getPhoneNumber2() == null || updatedUser.getPhoneNumber2().equals("")))
-            currentUser.setPhoneNumber2(updatedUser.getPhoneNumber2());
-
-        return currentUser;
-    }
 }
