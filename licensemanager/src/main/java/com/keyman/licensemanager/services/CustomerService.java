@@ -64,7 +64,7 @@ public class CustomerService {
     }
     
 
-    private Customer mapToCustomerDT0(CustomerDTO customerDTO) {
+    public Customer mapToCustomerEntity(CustomerDTO customerDTO) {
         Customer customer = new Customer();
         customer.setName(customerDTO.getName());
         customer.setDepartment(customerDTO.getDepartment());
@@ -92,19 +92,6 @@ public class CustomerService {
     public List<Customer> getAllCustomers()
     {
         return customerRepository.findAll();
-    }
-
-    public Customer mapToCustomerEntity(CustomerDTO customerDTO) {
-        Customer customerEntity = new Customer();
-    
-        // Hier erfolgt die Zuordnung der Werte von CustomerDTO zu Customer
-        if (customerDTO.getId() != null) {
-            customerEntity.setId(customerDTO.getId());
-        }
-        customerEntity.setName(customerDTO.getName());
-        // Weitere Zuordnungen je nach Ihren Datenmodellen
-    
-        return customerEntity;
     }
     
 }
