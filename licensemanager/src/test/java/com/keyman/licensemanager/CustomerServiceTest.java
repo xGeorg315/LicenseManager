@@ -81,7 +81,7 @@ class CustomerServiceTest {
         List<CustomerDTO> customers = customerService.searchCustomersByName(pattern);
         assertNotNull(customers);
         // Ändern Sie die Erwartung basierend auf Ihren Testdaten und Anforderungen
-        assertTrue(customers.size() >= 0);
+        assertTrue(customers.size() > 0);
     }
     
 }
