@@ -4,16 +4,10 @@ package com.keyman.licensemanager;
 
 import com.keyman.licensemanager.DTOs.CustomerDTO;
 import com.keyman.licensemanager.entities.Customer;
-import com.keyman.licensemanager.repositorys.CustomerRepository;
 import com.keyman.licensemanager.services.CustomerService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -66,7 +60,7 @@ class CustomerServiceTest {
         customerDTO.setZipCode("12345");
         customerDTO.setCountry("TestCountry");
 
-        CustomerDTO createdCustomerDTO = customerService.createCustomer(customerDTO);
+        customerService.createCustomer(customerDTO);
 
         List<CustomerDTO> customers = customerService.getAllCustomersWithUsers();
         assertNotNull(customers);

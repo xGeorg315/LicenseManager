@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import com.keyman.licensemanager.DTOs.CustomerDTO;
 import com.keyman.licensemanager.entities.Customer;
 import com.keyman.licensemanager.repositorys.CustomerRepository;
-import java.util.Collections;
 
 import java.util.List;
 import java.util.regex.Pattern;

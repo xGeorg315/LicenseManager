@@ -19,7 +19,6 @@ import java.util.regex.Pattern;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.keyman.licensemanager.DTOs.AllCustomerReturnDTO;
 
 @RestController
 @RequestMapping("/customers")

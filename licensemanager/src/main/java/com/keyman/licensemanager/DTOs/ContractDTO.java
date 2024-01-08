@@ -1,9 +1,5 @@
 package com.keyman.licensemanager.DTOs;
 
-import java.util.List;
-
-import com.keyman.licensemanager.entities.Contract;
-import com.keyman.licensemanager.entities.Customer;
 
 import lombok.Data;
 
