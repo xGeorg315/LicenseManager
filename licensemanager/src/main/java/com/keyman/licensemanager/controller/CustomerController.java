@@ -21,9 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.keyman.licensemanager.DTOs.AllCustomerReturnDTO;
 
-
-
-
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
