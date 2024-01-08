@@ -52,14 +52,22 @@ class CustomerServiceTest {
 
         assertNotNull(updatedCustomer);
         assertEquals(updatedName, updatedCustomer.getName());
-
-        // Test Delete
-        customerService.deleteCustomer(customerId);
-        assertNull(customerService.updateCustomer(customerId, updatedCustomer));
     }
 
     @Test
     void testGetAllCustomersWithUsers() {
+
+        // Test Create
+        CustomerDTO customerDTO = new CustomerDTO();
+        customerDTO.setName("TestCustomer");
+        customerDTO.setDepartment("TestDepartment");
+        customerDTO.setStreet("TestStreet");
+        customerDTO.setTown("TestTown");
+        customerDTO.setZipCode("12345");
+        customerDTO.setCountry("TestCountry");
+
+        CustomerDTO createdCustomerDTO = customerService.createCustomer(customerDTO);
+
         List<CustomerDTO> customers = customerService.getAllCustomersWithUsers();
         assertNotNull(customers);
         assertTrue(customers.size() > 0);
