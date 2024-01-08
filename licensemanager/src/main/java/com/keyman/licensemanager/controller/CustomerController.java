@@ -48,6 +48,15 @@ public class CustomerController {
         return new ResponseEntity<>(allCustomerReturnDTO, HttpStatus.OK);
 
     }
+
+    @GetMapping("/admin/list_customers")
+    public ResponseEntity<AllCustomerReturnDTO> list_customers_admin() 
+    {
+        AllCustomerReturnDTO allCustomerReturnDTO = new AllCustomerReturnDTO(customerService.getAllCustomers(), contractService.getAllContracts());
+        return new ResponseEntity<>(allCustomerReturnDTO, HttpStatus.OK);
+
+    }
+    
     
 
     @GetMapping("list_first_customer")
