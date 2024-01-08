@@ -102,6 +102,7 @@ public class ContractController {
 
         contractService.updateContract(updateContract.getId(), contract);
 
+        return new ResponseEntity<>("admin edit success", HttpStatus.OK);
     }
 
     @Transactional
