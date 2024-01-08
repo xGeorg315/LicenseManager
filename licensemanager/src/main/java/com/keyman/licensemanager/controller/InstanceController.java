@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/admin/instances")
+@RequestMapping("/instances")
 public class InstanceController {
 
     @Autowired
