@@ -22,9 +22,6 @@ import com.keyman.licensemanager.entities.UserEntity;
 import com.keyman.licensemanager.repositorys.ContractRepository;
 import com.keyman.licensemanager.repositorys.CustomerRepository;
 import com.keyman.licensemanager.repositorys.UserRepository;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController
@@ -101,6 +98,8 @@ public class ContractController {
         Contract updateContract = mapDTOtoContract(contractDTO, contract);
 
         contractService.updateContract(updateContract.getId(), contract);
+
+        return new ResponseEntity<>("admin edit success", HttpStatus.OK);
 
     }
 
