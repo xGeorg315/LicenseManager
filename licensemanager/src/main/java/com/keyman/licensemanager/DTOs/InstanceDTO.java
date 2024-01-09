@@ -1,6 +1,5 @@
 package com.keyman.licensemanager.DTOs;
 import com.keyman.licensemanager.entities.Instance;
-import com.keyman.licensemanager.entities.Contract;
 
 public class InstanceDTO {
     private int status;

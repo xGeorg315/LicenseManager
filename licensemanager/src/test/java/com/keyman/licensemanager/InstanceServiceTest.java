@@ -1,6 +1,5 @@
 package com.keyman.licensemanager;
 
-import com.keyman.licensemanager.DTOs.InstanceDTO;
 import com.keyman.licensemanager.entities.Instance;
 import com.keyman.licensemanager.repositorys.InstanceRepository;
 import com.keyman.licensemanager.services.InstanceService;

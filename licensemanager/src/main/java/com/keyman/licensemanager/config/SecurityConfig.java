@@ -30,9 +30,8 @@ public class SecurityConfig {
                 .authorizeRequests(req -> {
                     req
                         .antMatchers("/auth/**").permitAll() 
-
                         .antMatchers("/auth/admin/register").permitAll()
-                        .antMatchers("/users/**").hasAnyAuthority("ADMIN","USER")
+                        .antMatchers("/**").hasAnyAuthority("ADMIN","USER")
                         .antMatchers("/customer/admin/**").hasAuthority("ADMIN")
                         .antMatchers("/user/admin/**").hasAuthority("ADMIN")
                         .antMatchers("/contracts/**").hasAnyAuthority("ADMIN","USER")
@@ -40,7 +39,7 @@ public class SecurityConfig {
                         .antMatchers("/instance/admin/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated();
                     })
-                .httpBasic(Customizer.withDefaults())
+                .formLogin(Customizer.withDefaults())
                 .build();                             
     }
 

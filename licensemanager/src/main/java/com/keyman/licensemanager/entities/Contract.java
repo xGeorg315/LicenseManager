@@ -5,9 +5,7 @@ import javax.validation.constraints.Size;
 
 import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Data

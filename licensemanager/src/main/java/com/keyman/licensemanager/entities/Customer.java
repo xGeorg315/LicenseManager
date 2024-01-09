@@ -2,8 +2,6 @@ package com.keyman.licensemanager.entities;
 
 import javax.validation.constraints.Size;
 
-import org.apache.tomcat.jni.User;
-
 import javax.persistence.*;
 
 import java.util.ArrayList;
