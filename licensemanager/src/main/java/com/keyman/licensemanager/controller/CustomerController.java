@@ -20,6 +20,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
+import com.keyman.licensemanager.DTOs.AllCustomerReturnDTO;
+//Test
+
+
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
@@ -34,7 +38,7 @@ public class CustomerController {
     @Autowired
     private ContractService contractService;
 
-    @PostMapping("/admin/create_Customer")
+    @PostMapping("create_Customer")
     public ResponseEntity<CustomerDTO> createCustomer(@RequestBody CustomerDTO customerDTO) {
         CustomerDTO createdCustomer = customerService.createCustomer(customerDTO);
         return new ResponseEntity<>(createdCustomer, HttpStatus.CREATED);
