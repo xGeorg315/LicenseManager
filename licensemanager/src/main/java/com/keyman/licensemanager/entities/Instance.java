@@ -1,12 +1,13 @@
 package com.keyman.licensemanager.entities;
 
-import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
+
 import aj.org.objectweb.asm.Type;
 import lombok.Data;
+
 
 @Entity
 @Data
